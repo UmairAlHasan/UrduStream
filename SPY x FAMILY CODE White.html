@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<title>PakOTT.Com</title>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/Netflix%20Skin%20v2.0.6.css">
+    <style>
+        #player {
+            position: absolute;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        #center-ad {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            background-color: #ccc;
+            display: block;
+            z-index: 9999;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            background-color: #ff0000;
+            color: #000;
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #skipBtn,
+        #skipoutro {
+            position: fixed;
+            font-family: "Roboto", sans-serif;
+            right: 0px;
+            bottom: 140px;
+            padding: 10px 17px;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* Hover effects */
+        #skipBtn:hover,
+        #skipoutro:hover {
+            background-color: #ff0000;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        #skipBtn,
+        #skipoutro {
+            display: none;
+            /* Hidden by default */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="player"></div>
+
+    <button id="skipBtn">Skip Intro <i class="fa fa-forward"></i></button>
+    <button id="skipoutro">Skip Outro <i class="fa fa-forward"></i></button>
+
+    <script src="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/JWPlayer-8.21.1.js"></script>
+    <script>
+        // Initialize player sources
+        const sources = {
+            default: "https://firebasestorage.googleapis.com/v0/b/direct-download-link-976ca.appspot.com/o/SPY%20x%20FAMILY%20CODE%20White%201080p.mp4?alt=media&token=5b67f59e-00c5-4a6a-8dd2-79b806876e10",
+        };
+
+        // Setup JW Player
+        let playerInstance = jwplayer("player").setup({
+            controls: true,
+            sharing: true,
+            displaytitle: true,
+            displaydescription: true,
+            autostart: true,
+            mute: false,
+            abouttext: "",
+            aboutlink: "",
+            skin: {
+                name: "netflix"
+            },
+            playlist: [{
+                title: "",
+                description: "",
+                image: '',
+                file: sources["default"],
+            }],
+            advertising: {
+                client: "vast",
+                schedule: [{
+                    offset: "pre",
+                    tag: ""
+                }]
+            }
+        });
+
+        // Intro and outro skip functionality (adjust times based on your content)
+        const introStartTime = 0;  // Set the intro start time (seconds)
+        const introEndTime = 0;   // Set the intro end time (seconds)
+        const outroStartTime = 0; // Set the outro start time (seconds)
+        const outroEndTime = 0;   // Set the outro end time (seconds)
+
+        // Select the skip buttons
+        const skipBtn = document.getElementById('skipBtn');
+        const skipOutroBtn = document.getElementById('skipoutro');
+
+        // Listen to player time updates
+        playerInstance.on('time', function (event) {
+            const currentTime = event.position;
+            console.log(`Current Time: ${currentTime}`);
+
+            // Show or hide the Skip Intro button
+            if (currentTime >= introStartTime && currentTime <= introEndTime) {
+                skipBtn.style.display = 'block';
+            } else {
+                skipBtn.style.display = 'none';
+            }
+
+            // Show or hide the Skip Outro button
+            if (currentTime >= outroStartTime && currentTime <= outroEndTime) {
+                skipOutroBtn.style.display = 'block';
+            } else {
+                skipOutroBtn.style.display = 'none';
+            }
+        });
+
+        // Add event listeners to the buttons
+        skipBtn.addEventListener('click', function () {
+            console.log("Skipping intro...");
+            playerInstance.seek(introEndTime);
+        });
+
+        skipOutroBtn.addEventListener('click', function () {
+            console.log("Skipping outro...");
+            playerInstance.seek(outroEndTime);
+        });
+
+        playerInstance.on('ready', function () {
+            playerInstance.on('meta', function (meta) {
+                const totalDuration = meta.duration;
+
+                const setting = document.querySelector('.jw-settings-menu');
+                if (setting) {
+                    setting.style.zIndex = '12332344334';
+                } else {
+                    console.log('Element not found');
+                }
+
+                const introWidth = ((introEndTime - introStartTime) / totalDuration) * 100;
+                const outroWidth = ((outroEndTime - outroStartTime) / totalDuration) * 100;
+
+                const introDiv = document.createElement('div');
+                introDiv.className = "jw-timesegment-bar jw-timesegment-background jw-reset intro-outro";
+                introDiv.style.position = 'absolute';
+                introDiv.style.left = `${(introStartTime / totalDuration) * 100}%`;
+                introDiv.style.width = `${introWidth}%`;
+                introDiv.style.height = '100%';
+                introDiv.style.backgroundColor = '#fdd253';
+                introDiv.style.zIndex = "564576764";
+
+                const outroDiv = document.createElement('div');
+                outroDiv.className = "jw-timesegment-bar jw-timesegment-background jw-reset outro-segment";
+                outroDiv.style.position = 'absolute';
+                outroDiv.style.left = `${(outroStartTime / totalDuration) * 100}%`;
+                outroDiv.style.width = `${outroWidth}%`;
+                outroDiv.style.height = '100%';
+                outroDiv.style.backgroundColor = '#fdd253';
+                outroDiv.style.zIndex = "564576764";
+
+                const progressBar = document.querySelector('.jw-rail');
+                if (progressBar) {
+                    progressBar.appendChild(introDiv);
+                    progressBar.appendChild(outroDiv);
+                }
+            });
+        });
+
+        // Quality change function
+        document.getElementById('quality').addEventListener('change', function () {
+            const selectedQuality = this.value;
+
+            if (sources[selectedQuality]) {
+                playerInstance.load([{
+                    file: sources[selectedQuality],
+                    type: "hls"
+                }]);
+                playerInstance.play();
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
