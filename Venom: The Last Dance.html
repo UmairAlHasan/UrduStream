@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PakOTT.Com</title>
+    <!-- Include VidStack player styles -->
+    <link rel="stylesheet"
+        href="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/theme-vidstack-v5.3.2.css">
+    <link rel="stylesheet"
+        href="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/video-vidstack-v5.3.2.css">
+</head>
+
+<body>
+    <!-- Player container -->
+    <div id="playerContainer"></div>
+
+    <!-- Include VidStack player script -->
+    <script type="module">
+        import { VidstackPlayer, VidstackPlayerLayout } from 'https://cdn.vidstack.io/player';
+
+        async function createPlayer() {
+            const player = await VidstackPlayer.create({
+                target: '#playerContainer',
+                title: 'Venom: The Last Dance',
+                src: 'https://www.dropbox.com/scl/fi/0yotbh247fkw8hpmc1y3q/Venom-The-Last-Dance2.mp4?rlkey=49wemjwdoo9uwsjq0pl6djcwj&st=kfmzbl4q&dl=1',
+                // Optional: Add a poster image
+                poster: 'https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/Romi.jpg',
+                layout: new VidstackPlayerLayout({
+                    // Optional: Add thumbnails
+                    thumbnails: 'https://example.com/thumbnails.vtt'
+                }),
+                autoplay: true,
+                playsinline: true,
+                fullscreen: {
+                    enabled: false // Explicitly disable fullscreen
+                },
+                // Add captions (subtitles)
+                tracks: [
+                    {
+                        kind: 'subtitles',  // Type of track
+                        label: 'Arabic',   // Language label
+                        src: 'https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/caption-ar.vtt', // Path to the VTT file
+                        srclang: 'ar',      // Language code
+                    },
+                    {
+                        kind: 'subtitles',  // Type of track
+                        label: 'English',   // Language label
+                        src: 'https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/caption-en.vtt', // Path to the VTT file
+                        srclang: 'en',      // Language code
+                        default: true       // Set this track as default (optional)
+                    },
+                    {
+                        kind: 'subtitles',  // Type of track
+                        label: 'Hindi',   // Language label
+                        src: 'https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/caption-hi.vtt', // Path to the VTT file
+                        srclang: 'hi',      // Language code
+                    },
+                    {
+                        kind: 'subtitles',  // Type of track
+                        label: 'Urdu',   // Language label
+                        src: 'https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/caption-ur.vtt', // Path to the VTT file
+                        srclang: 'ur',      // Language code
+                    }
+                ]
+            });
+        }
+
+        createPlayer();
+    </script>
+</body>
+
+</html>
