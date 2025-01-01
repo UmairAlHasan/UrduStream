@@ -9,8 +9,15 @@
 </head>
 <style>
   .artplayer-app {
-    width: 1270px;
-    height: 800px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background: transparent;
   }
 </style>
 <link rel="stylesheet" href="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/artplayer.css" />
@@ -20,7 +27,7 @@
   <script>
     var art = new Artplayer({
       container: ".artplayer-app",
-      url: 'https://www.dropbox.com/scl/fi/0yotbh247fkw8hpmc1y3q/Venom-The-Last-Dance2.mp4?rlkey=49wemjwdoo9uwsjq0pl6djcwj&st=kfmzbl4q&dl=1',
+      url: 'https://www.dropbox.com/scl/fi/9zdq473b2pe7f3ush6tac/Blue-Lock-Ep1.mkv?rlkey=tvc6q172rd02mjvgilu954xg3&st=rw20zyf5&dl=1',
       poster: 'https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/Romi.jpg',
       volume: 0.5,
       isLive: false,
@@ -148,7 +155,7 @@
         type: 'vtt',
         style: {
           color: '#ff0000',
-          fontSize: '20px',
+          fontSize: '10px',
         },
         encoding: 'utf-8',
       },
