@@ -1,69 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PakOTT.Com</title>
-    <!-- Include JW Player library -->
-    <script src="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/plyr-io-v3.7.8.js"></script>
-    <link rel="stylesheet" href="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/plyr-io-v3.7.8.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <script src="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/artplayer.js"></script>
 
-
-    <style>
-        :root {
-      --plyr-color-main: #ff0000;
-      --plyr-video-control-color:#ffffff;
-      --plyr-font-family: righteous;
-      }
-      
-      </style>
 </head>
+<style>
+    .artplayer-app {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        background: transparent;
+    }
+</style>
+<link rel="stylesheet" href="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/artplayer.css" />
+
 <body>
-<!--Add a Simple HTML5 Video tag-->
-<div id="container">   
-  <video controls data-poster="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/Romi.jpg" class="vid1">
-    <!-- Video files -->
-    <source src="https://firebasestorage.googleapis.com/v0/b/view-counter-ar.appspot.com/o/Pushpa%202%20The%20Rule.mp4?alt=media&token=c2d97834-9e8a-4d30-aeac-a4f737c0d7df" type="video/mp4" size="2160" default />
-    <source src="https://firebasestorage.googleapis.com/v0/b/view-counter-ar.appspot.com/o/Pushpa%202%20The%20Rule.mp4?alt=media&token=c2d97834-9e8a-4d30-aeac-a4f737c0d7df" type="video/mp4" size="1440" default />
-    <source src="https://firebasestorage.googleapis.com/v0/b/view-counter-ar.appspot.com/o/Pushpa%202%20The%20Rule.mp4?alt=media&token=c2d97834-9e8a-4d30-aeac-a4f737c0d7df" type="video/mp4" size="1080" default />
-    <source src="https://firebasestorage.googleapis.com/v0/b/view-counter-ar.appspot.com/o/Pushpa%202%20The%20Rule.mp4?alt=media&token=c2d97834-9e8a-4d30-aeac-a4f737c0d7df" type="video/mp4" size="720" default />
-    <source src="https://firebasestorage.googleapis.com/v0/b/view-counter-ar.appspot.com/o/Pushpa%202%20The%20Rule.mp4?alt=media&token=c2d97834-9e8a-4d30-aeac-a4f737c0d7df" type="video/mp4" size="480" default />
+    <div class="artplayer-app"></div>
+    <script>
+        var art = new Artplayer({
+            container: ".artplayer-app",
+            url: 'https://www.dropbox.com/scl/fi/rd5yoyzrqvkh86ogw6xrd/Pushpa-2-The-Rule.mp4?rlkey=uv35bb11fjo13r0yjlt3a2hfy&st=ao5v3dh3&dl=1',
+            poster: 'https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/Romi.jpg',
+            volume: 0.5,
+            isLive: false,
+            muted: false,
+            autoplay: true,
+            pip: false,
+            autoSize: true,
+            autoMini: true,
+            screenshot: false,
+            setting: true,
+            hotkey: true,
+            loop: true,
+            flip: false,
+            playbackRate: true,
+            aspectRatio: true,
+            fullscreen: true,
+            fullscreenWeb: true,
+            subtitleOffset: false,
+            miniProgressBar: true,
+            mutex: true,
+            backdrop: true,
+            playsInline: true,
+            autoPlayback: true,
+            fastForward: true,
+            autoOrientation: false,
+            airplay: true,
+            theme: '#ff0000',
+            lang: 'en',
+            i18n: {
+                'en': {
+                    Play: 'Playing',
+                },
+            },
 
-    <!-- Caption files -->
-    <track kind="captions" label="Arabic" srclang="ar" src="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-ar.vtt" />
-<track kind="captions" label="English" srclang="en" src="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-en.vtt" default />
-<track kind="captions" label="Hindi" srclang="hi" src="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-hi.vtt" />
-<track kind="captions" label="Urdu" srclang="ur" src="https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-ur.vtt" />
 
+            settings: [{
+                width: 200,
+                html: 'Subtitle',
+                tooltip: 'English',
+                icon: '<img width="22" heigth="22" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/cc.svg">',
+                selector: [{
+                        html: 'None',
+                        url: '',
+                    },
+                    {
 
-  </video>
-</div>
-<script>
-  var controls =
-[
-    'play-large', // The large play button in the center
-   // 'restart', // Restart playback
-   // 'rewind', // Rewind by the seek time (default 10 seconds)
-    'play', // Play/pause playback
-    'fast-forward', // Fast forward by the seek time (default 10 seconds)
-    'progress', // The progress bar and scrubber for playback and buffering
-    'current-time', // The current time of playback
-    'duration', // The full duration of the media
-    'mute', // Toggle mute
-    'volume', // Volume control
-    'captions', // Toggle captions
-    'settings', // Settings menu
-    //'pip', // Picture-in-picture (currently Safari only)
-    'airplay', // Airplay (currently Safari only)
-    //'download', // Show a download button with a link to either the current source or a custom URL you specify in your options
-    'fullscreen' // Toggle fullscreen
-];
+                        html: 'Arabic',
+                        url: 'https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-ar.vtt',
+                    },
+                    {
+                        default: true,
+                        html: 'English',
+                        url: 'https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-en.vtt',
+                    },
+                    {
+                        html: 'Hindi',
+                        url: 'https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-hi.vtt',
+                    },
+                    {
+                        html: 'Urdu',
+                        url: 'https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-ur.vtt',
+                    },
+                ],
+                onSelect: function (item) {
+                    art.subtitle.switch(item.url, {
+                        name: item.html,
+                    });
+                    return item.html;
+                },
+            }, ],
+            contextmenu: [{
+                html: 'PakOTT.Com',
+                click: function (contextmenu) {
+                    console.info('You clicked on the custom menu');
+                    contextmenu.show = true;
+                },
+            }, ],
+            thumbnails: {
+                url: 'https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/Romi.jpg',
+                number: 60,
+                column: 10,
+                scale: 0.85,
+            },
+            subtitle: {
+                url: 'https://raw.githack.com/UmairAlHasan/AR-Player/refs/heads/main/caption-en.vtt',
+                type: 'vtt',
+                style: {
+                    color: '#ff0000',
+                    fontSize: '10px',
+                },
+                encoding: 'utf-8',
+            },
+            highlight: [{
+                time: 300,
+                text: 'Start',
+            }, ],
 
-const player = new Plyr('.vid1', {
-        controls,
-        captions: { active: true, language: 'en', update: true },
-    });
-</script>
+            layers: [{
+                html: '<img width="100" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/pakott.png">',
+                click: function () {
+                    window.open('https://pakott.blogspot.com');
+                    console.info('You clicked on the custom layer');
+                },
+                style: {
+                    position: 'absolute',
+                    top: '20px',
+                    right: '20px',
+                    opacity: '.9',
+                },
+            }, ],
+
+            icons: {
+                loading: '<img src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/redloading.gif">',
+                state: '<img width="150" heigth="150" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/state1.svg">',
+                indicator: '<img width="16" heigth="16" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/indicator.svg">',
+                play: '<img width="16" heigth="16" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/play.svg">',
+                pause: '<img width="16" heigth="16" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/pause.svg">',
+                subtitle: '<img width="16" heigth="16" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/cc.svg">',
+                //fullscreenOn: '<img src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/fs-on.svg">',
+                //fullscreenOff: '<img src="/assets/indicator.svg">',
+                //volume: '<img src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/volume.svg">',
+                //volumeClose: '<img src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/vl-close.svg">',
+                //fullscreenWeb: '<img width="16" heigth="16" src="/assets/fs-on.svg">',
+                pip: '<img width="16" heigth="16" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/pip.svg">',
+                lock: '<img width="16" heigth="16" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/lock.svg">',
+                unlock: '<img width="16" heigth="16" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/unlock.svg">',
+                screenshot: '<img width="16" heigth="16" src="https://raw.githubusercontent.com/UmairAlHasan/AR-Player/refs/heads/main/assets/indicator.svg">',
+                //setting: '<img width="16" heigth="16" src="/assets/setting.svg">',
+                //playbackRate: '<img width="16" heigth="16" src="/assets/indicator.svg">',
+                //aspectRatio: '<img width="16" heigth="16" src="/assets/indicator.svg">',
+                //backward: '<img width="16" heigth="16" src="/assets/indicator.svg">',
+                //forward: '<img width="16" heigth="16" src="/assets/indicator.svg">',
+                //menu: '<img width="16" heigth="16" src="/assets/indicator.svg">',
+            },
+        });
+    </script>
 </body>
+
 </html>
